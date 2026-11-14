@@ -38,7 +38,7 @@ python -m src.serving.recommend --user-id 6040 --k 10
 pytest -q tests
 ```
 Airflow: copy `dags/airflow_dag.py` to `$AIRFLOW_HOME/dags`, export `RECSYS_PROJECT_ROOT=$(pwd)`, run `airflow standalone`.
-Kaggle: import `recommendation_pipeline_kaggle.ipynb`, turn Internet on, and Run All.
+Kaggle: import `2025AG05670_DM4ML_Assignment2.ipynb`, turn Internet on, and Run All.
 
 ## Structure
 
