@@ -1,0 +1,149 @@
+# =====================================================================
+# Recommendation Pipeline - central configuration
+# Every stage reads ONLY from this file, so a run is fully reproducible
+# from (code version + this config + seed).
+# =====================================================================
+
+project:
+  name: movielens-recommendation-pipeline
+  seed: 42
+
+paths:
+  raw: data/raw
+  raw_source: data/raw/source          # untouched downloaded files
+  processed: data/processed
+  features: data/features
+  errors: data/errors
+  models: models
+  reports: reports
+  logs: logs
+
+# ---------------------------------------------------------------------
+# 1. Ingestion
+# ---------------------------------------------------------------------
+ingestion:
+  dataset: MovieLens 1M (GroupLens Research)
+  # auto = try, in order: (1) a MovieLens-1M dataset attached in Kaggle (users/movies/ratings.dat),
+  # (2) the official GroupLens zip, (3) a GitHub CSV mirror of the same data.
+  source_type: auto                    # auto | kaggle_input | grouplens_zip | github_csv | local
+  auto_order: [kaggle_input, grouplens_zip, github_csv]
+  kaggle_input:
+    search_root: /kaggle/input         # searched recursively for ratings.dat
+  github_csv:
+    base_url: https://raw.githubusercontent.com/khanhnamle1994/movielens/master
+    files:
+      users: users.csv
+      items: movies.csv
+      interactions: ratings.csv
+    sep: "\t"
+    encoding: latin-1
+  grouplens_zip:
+    url: https://files.grouplens.org/datasets/movielens/ml-1m.zip
+  local:
+    dir: data/raw/source               # put users.csv / movies.csv / ratings.csv here
+  download_retries: 3
+  timeout_seconds: 120
+
+  # MovieLens is a curated dataset and is almost perfectly clean.
+  # To prove that the validation layer works on real-world dirty data we
+  # inject a SMALL, SEEDED, DOCUMENTED set of anomalies into the raw copy.
+  # Set enabled: false to ingest the pristine dataset.
+  anomaly_injection:
+    enabled: true
+    interactions:
+      exact_duplicates: 1000
+      re_ratings: 300                  # same user+item, later timestamp (resolved in preparation)
+      missing_rating: 300
+      missing_user_id: 200
+      out_of_range_rating: 300         # e.g. 0, 6, 7.5, -1
+      non_numeric_rating: 200          # e.g. "five", "abc"
+      invalid_timestamp: 300           # future, negative, malformed
+      orphan_user: 150                 # user_id not in users table
+      orphan_item: 150                 # movie_id not in items table
+    users:
+      exact_duplicates: 20
+      missing_gender: 15
+      lowercase_gender: 25             # format issue -> standardised in preparation
+      invalid_age: 10
+      missing_zipcode: 15
+    items:
+      exact_duplicates: 10
+      missing_genres: 8
+      missing_title: 5
+      padded_title: 20                 # leading/trailing whitespace
+
+# ---------------------------------------------------------------------
+# 2. Validation
+# ---------------------------------------------------------------------
+validation:
+  rating_min: 1
+  rating_max: 5
+  rating_integer_only: true
+  timestamp_min: "1995-01-01"          # MovieLens 1M collected 2000-2003
+  timestamp_max: "2026-01-01"
+  valid_genders: [M, F]
+  valid_ages: [1, 18, 25, 35, 45, 50, 56]   # MovieLens age buckets
+  occupation_range: [0, 20]
+  fail_pipeline_if_error_rate_above: 0.05    # quality gate (5%)
+
+# ---------------------------------------------------------------------
+# 3-4. Preparation & transformation
+# ---------------------------------------------------------------------
+preparation:
+  dedup_interactions_keep: last        # for re-ratings keep the most recent rating
+
+transformation:
+  split_strategy: global_time          # time-based split
+  test_fraction: 0.2                   # last 20% of interactions (by time) -> test
+  relevance_threshold: 4               # rating >= 4 counts as "relevant" in ranking metrics
+  min_train_interactions_per_user: 5
+
+# ---------------------------------------------------------------------
+# 5. Features
+# ---------------------------------------------------------------------
+features:
+  bayesian_prior_count: 25             # m in Bayesian average (shrinks low-count items)
+  recency_reference: split_cutoff      # "days since" measured at the train/test cutoff
+
+# ---------------------------------------------------------------------
+# 6. Models
+# ---------------------------------------------------------------------
+models:
+  popularity:
+    score: interaction_count           # interaction_count | bayesian_avg
+  item_knn:
+    shrinkage: 10.0
+    neighbours: 100                    # keep top-N similar items per item
+  matrix_factorization:
+    n_factors: 50
+    n_iterations: 15
+    reg_factors: 0.08
+    reg_bias: 5.0
+  hybrid:
+    # default weights - overwritten by the validation grid search below when tuning.enabled
+    alpha_cf: 0.6                      # weight of item-kNN collaborative score
+    beta_content: 0.1                  # weight of genre-affinity content score
+    gamma_popularity: 0.3              # weight of popularity prior (1 - alpha - beta)
+
+# Hyper-parameter tuning for the hybrid on a validation split carved from TRAIN
+tuning:
+  enabled: true
+  validation_fraction: 0.1             # last 10% of training interactions (by time)
+  alpha_grid: [0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]
+  beta_grid: [0.0, 0.05, 0.1, 0.2]
+
+# ---------------------------------------------------------------------
+# 7. Evaluation
+# ---------------------------------------------------------------------
+evaluation:
+  k: 10
+  k_list: [5, 10]
+  primary_metric: ndcg_at_10
+
+# ---------------------------------------------------------------------
+# 8. Experiment tracking
+# ---------------------------------------------------------------------
+mlflow:
+  tracking_uri: sqlite:///mlflow.db
+  artifact_location: mlruns
+  experiment_name: movielens-recommender

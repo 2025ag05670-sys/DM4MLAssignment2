@@ -1,0 +1,73 @@
+{
+  "dataset": "MovieLens 1M (GroupLens Research)",
+  "source_type": "auto",
+  "resolved_source": "grouplens_zip",
+  "ingested_at_utc": "2026-11-14T03:05:26.702159+00:00",
+  "source_row_counts": {
+    "users": 6040,
+    "items": 3883,
+    "interactions": 1000209
+  },
+  "anomaly_injection_enabled": true,
+  "injected_anomalies": {
+    "interactions": {
+      "exact_duplicates": 1000,
+      "re_ratings": 300,
+      "missing_rating": 300,
+      "missing_user_id": 200,
+      "out_of_range_rating": 300,
+      "non_numeric_rating": 200,
+      "invalid_timestamp": 300,
+      "orphan_user": 150,
+      "orphan_item": 150
+    },
+    "users": {
+      "exact_duplicates": 20,
+      "missing_gender": 15,
+      "lowercase_gender": 25,
+      "invalid_age": 10,
+      "missing_zipcode": 15
+    },
+    "items": {
+      "exact_duplicates": 10,
+      "missing_genres": 8,
+      "missing_title": 5,
+      "padded_title": 20
+    }
+  },
+  "outputs": {
+    "users": {
+      "file": "data/raw/users.csv",
+      "rows": 6060,
+      "columns": [
+        "user_id",
+        "gender",
+        "age",
+        "occupation",
+        "zipcode"
+      ],
+      "md5": "6ce32f0f60e68a5720b624f8aa282875"
+    },
+    "items": {
+      "file": "data/raw/items.csv",
+      "rows": 3893,
+      "columns": [
+        "movie_id",
+        "title",
+        "genres"
+      ],
+      "md5": "0e11e0c726e33249f073ab051831cafb"
+    },
+    "interactions": {
+      "file": "data/raw/interactions.csv",
+      "rows": 1001509,
+      "columns": [
+        "user_id",
+        "movie_id",
+        "rating",
+        "timestamp"
+      ],
+      "md5": "0a5e5b69205618bd292bd83755e24469"
+    }
+  }
+}

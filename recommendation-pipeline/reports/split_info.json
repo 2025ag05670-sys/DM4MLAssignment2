@@ -1,0 +1,28 @@
+{
+  "strategy": "global_time",
+  "cutoff_utc": "2000-12-02T14:58:06+00:00",
+  "train_rows": 798886,
+  "test_rows_before_filter": 199725,
+  "test_rows": 103666,
+  "train_period": [
+    "2000-04-25T23:05:32+00:00",
+    "2000-12-02T14:58:03+00:00"
+  ],
+  "test_period": [
+    "2000-12-02T14:58:06+00:00",
+    "2003-02-28T17:49:50+00:00"
+  ],
+  "cold_start_rows_dropped": 96059,
+  "cold_start_users_in_test": 648,
+  "train_users": 5400,
+  "train_items": 3662,
+  "test_users": 1167,
+  "test_items": 3405,
+  "test_relevant_rows": 55720,
+  "test_users_with_relevant": 1131,
+  "matrix_shape": [
+    5400,
+    3662
+  ],
+  "matrix_density_pct": 4.04
+}

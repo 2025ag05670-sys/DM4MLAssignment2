@@ -1,0 +1,250 @@
+{
+  "popularity": {
+    "635": [
+      "Star Wars: Episode IV - A New Hope (1977)",
+      "Star Wars: Episode V - The Empire Strikes Back (1980)",
+      "Star Wars: Episode VI - Return of the Jedi (1983)",
+      "Terminator 2: Judgment Day (1991)",
+      "Saving Private Ryan (1998)",
+      "Matrix, The (1999)",
+      "Men in Black (1997)",
+      "Raiders of the Lost Ark (1981)",
+      "Braveheart (1995)",
+      "Sixth Sense, The (1999)"
+    ],
+    "639": [
+      "American Beauty (1999)",
+      "Star Wars: Episode VI - Return of the Jedi (1983)",
+      "Back to the Future (1985)",
+      "Silence of the Lambs, The (1991)",
+      "Fargo (1996)",
+      "Braveheart (1995)",
+      "Shakespeare in Love (1998)",
+      "Princess Bride, The (1987)",
+      "Schindler's List (1993)",
+      "L.A. Confidential (1997)"
+    ],
+    "641": [
+      "Star Wars: Episode IV - A New Hope (1977)",
+      "Star Wars: Episode V - The Empire Strikes Back (1980)",
+      "Terminator 2: Judgment Day (1991)",
+      "Saving Private Ryan (1998)",
+      "Jurassic Park (1993)",
+      "Matrix, The (1999)",
+      "Men in Black (1997)",
+      "Braveheart (1995)",
+      "Sixth Sense, The (1999)",
+      "Princess Bride, The (1987)"
+    ],
+    "646": [
+      "Star Wars: Episode IV - A New Hope (1977)",
+      "Terminator 2: Judgment Day (1991)",
+      "Jurassic Park (1993)",
+      "Back to the Future (1985)",
+      "Matrix, The (1999)",
+      "Men in Black (1997)",
+      "Silence of the Lambs, The (1991)",
+      "Fargo (1996)",
+      "Raiders of the Lost Ark (1981)",
+      "Sixth Sense, The (1999)"
+    ],
+    "648": [
+      "Star Wars: Episode IV - A New Hope (1977)",
+      "Star Wars: Episode V - The Empire Strikes Back (1980)",
+      "Star Wars: Episode VI - Return of the Jedi (1983)",
+      "Saving Private Ryan (1998)",
+      "Jurassic Park (1993)",
+      "Men in Black (1997)",
+      "Raiders of the Lost Ark (1981)",
+      "Braveheart (1995)",
+      "Sixth Sense, The (1999)",
+      "Princess Bride, The (1987)"
+    ]
+  },
+  "item_knn_cf": {
+    "635": [
+      "Bridge on the River Kwai, The (1957)",
+      "Casablanca (1942)",
+      "Schindler's List (1993)",
+      "Shawshank Redemption, The (1994)",
+      "Citizen Kane (1941)",
+      "One Flew Over the Cuckoo's Nest (1975)",
+      "Hustler, The (1961)",
+      "Rear Window (1954)",
+      "GoodFellas (1990)",
+      "Godfather: Part II, The (1974)"
+    ],
+    "639": [
+      "Die Hard (1988)",
+      "Indiana Jones and the Last Crusade (1989)",
+      "Total Recall (1990)",
+      "Independence Day (ID4) (1996)",
+      "Star Wars: Episode VI - Return of the Jedi (1983)",
+      "Aliens (1986)",
+      "Braveheart (1995)",
+      "Abyss, The (1989)",
+      "Mission: Impossible (1996)",
+      "Full Metal Jacket (1987)"
+    ],
+    "641": [
+      "Wizard of Oz, The (1939)",
+      "Apocalypse Now (1979)",
+      "North by Northwest (1959)",
+      "Pulp Fiction (1994)",
+      "Taxi Driver (1976)",
+      "L.A. Confidential (1997)",
+      "To Kill a Mockingbird (1962)",
+      "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb (1963)",
+      "Godfather: Part II, The (1974)",
+      "Chinatown (1974)"
+    ],
+    "646": [
+      "Amadeus (1984)",
+      "Godfather, The (1972)",
+      "One Flew Over the Cuckoo's Nest (1975)",
+      "Right Stuff, The (1983)",
+      "Schindler's List (1993)",
+      "Godfather: Part II, The (1974)",
+      "Last Emperor, The (1987)",
+      "Witness (1985)",
+      "Great Escape, The (1963)",
+      "Gandhi (1982)"
+    ],
+    "648": [
+      "GoodFellas (1990)",
+      "Usual Suspects, The (1995)",
+      "Pulp Fiction (1994)",
+      "Shawshank Redemption, The (1994)",
+      "Simple Plan, A (1998)",
+      "Good Will Hunting (1997)",
+      "Sixth Sense, The (1999)",
+      "Dead Man Walking (1995)",
+      "Insider, The (1999)",
+      "Trainspotting (1996)"
+    ]
+  },
+  "matrix_factorization_als": {
+    "635": [
+      "Wrong Trousers, The (1993)",
+      "Close Shave, A (1995)",
+      "Schindler's List (1993)",
+      "Sunset Blvd. (a.k.a. Sunset Boulevard) (1950)",
+      "Third Man, The (1949)",
+      "Double Indemnity (1944)",
+      "400 Blows, The (Les Quatre cents coups) (1959)",
+      "Shawshank Redemption, The (1994)",
+      "Rear Window (1954)",
+      "Grand Day Out, A (1992)"
+    ],
+    "639": [
+      "Foreign Student (1994)",
+      "Grand Illusion (Grande illusion, La) (1937)",
+      "Bewegte Mann, Der (1994)",
+      "Sanjuro (1962)",
+      "Shawshank Redemption, The (1994)",
+      "World of Apu, The (Apur Sansar) (1959)",
+      "Schindler's List (1993)",
+      "Life Is Beautiful (La Vita \u00e8 bella) (1997)",
+      "M (1931)",
+      "Smashing Time (1967)"
+    ],
+    "641": [
+      "See the Sea (Regarde la mer) (1997)",
+      "Creature Comforts (1990)",
+      "To Kill a Mockingbird (1962)",
+      "Vie est belle, La (Life is Rosey) (1987)",
+      "Bicycle Thief, The (Ladri di biciclette) (1948)",
+      "Yojimbo (1961)",
+      "Wallace & Gromit: The Best of Aardman Animation (1996)",
+      "Eighth Day, The (Le Huiti\u00e8me jour ) (1996)",
+      "World of Apu, The (Apur Sansar) (1959)",
+      "Foreign Student (1994)"
+    ],
+    "646": [
+      "Raiders of the Lost Ark (1981)",
+      "Big Sleep, The (1946)",
+      "Careful (1992)",
+      "Schindler's List (1993)",
+      "Maltese Falcon, The (1941)",
+      "Seven Samurai (The Magnificent Seven) (Shichinin no samurai) (1954)",
+      "Great Escape, The (1963)",
+      "Third Man, The (1949)",
+      "Star Wars: Episode IV - A New Hope (1977)",
+      "12 Angry Men (1957)"
+    ],
+    "648": [
+      "Pulp Fiction (1994)",
+      "Godfather, The (1972)",
+      "Citizen Kane (1941)",
+      "GoodFellas (1990)",
+      "Dr. Strangelove or: How I Learned to Stop Worrying and Love the Bomb (1963)",
+      "Clockwork Orange, A (1971)",
+      "Sunset Blvd. (a.k.a. Sunset Boulevard) (1950)",
+      "Conformist, The (Il Conformista) (1970)",
+      "One Flew Over the Cuckoo's Nest (1975)",
+      "Paths of Glory (1957)"
+    ]
+  },
+  "hybrid_cf_content": {
+    "635": [
+      "Shawshank Redemption, The (1994)",
+      "Star Wars: Episode V - The Empire Strikes Back (1980)",
+      "Schindler's List (1993)",
+      "Saving Private Ryan (1998)",
+      "One Flew Over the Cuckoo's Nest (1975)",
+      "Braveheart (1995)",
+      "Star Wars: Episode IV - A New Hope (1977)",
+      "Star Wars: Episode VI - Return of the Jedi (1983)",
+      "Terminator 2: Judgment Day (1991)",
+      "Shakespeare in Love (1998)"
+    ],
+    "639": [
+      "American Beauty (1999)",
+      "Star Wars: Episode VI - Return of the Jedi (1983)",
+      "Braveheart (1995)",
+      "Back to the Future (1985)",
+      "Princess Bride, The (1987)",
+      "Total Recall (1990)",
+      "Silence of the Lambs, The (1991)",
+      "Die Hard (1988)",
+      "Indiana Jones and the Last Crusade (1989)",
+      "Godfather, The (1972)"
+    ],
+    "641": [
+      "Star Wars: Episode V - The Empire Strikes Back (1980)",
+      "Star Wars: Episode IV - A New Hope (1977)",
+      "Saving Private Ryan (1998)",
+      "Being John Malkovich (1999)",
+      "Pulp Fiction (1994)",
+      "Groundhog Day (1993)",
+      "Braveheart (1995)",
+      "Princess Bride, The (1987)",
+      "Terminator 2: Judgment Day (1991)",
+      "Men in Black (1997)"
+    ],
+    "646": [
+      "Schindler's List (1993)",
+      "Silence of the Lambs, The (1991)",
+      "Star Wars: Episode IV - A New Hope (1977)",
+      "Godfather, The (1972)",
+      "One Flew Over the Cuckoo's Nest (1975)",
+      "Fargo (1996)",
+      "Amadeus (1984)",
+      "Terminator 2: Judgment Day (1991)",
+      "Raiders of the Lost Ark (1981)",
+      "Pulp Fiction (1994)"
+    ],
+    "648": [
+      "Shawshank Redemption, The (1994)",
+      "Saving Private Ryan (1998)",
+      "Star Wars: Episode V - The Empire Strikes Back (1980)",
+      "Sixth Sense, The (1999)",
+      "Pulp Fiction (1994)",
+      "Braveheart (1995)",
+      "Star Wars: Episode IV - A New Hope (1977)",
+      "Schindler's List (1993)",
+      "Star Wars: Episode VI - Return of the Jedi (1983)",
+      "Good Will Hunting (1997)"
+    ]
+  }
+}

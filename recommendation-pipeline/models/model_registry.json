@@ -1,0 +1,46 @@
+{
+  "trained_at_utc": "2026-11-14T03:05:49.803580+00:00",
+  "models": {
+    "popularity": {
+      "run_id": "b5e7b0707a6045f1b2d4f0156ad6b8ff",
+      "path": "popularity.pkl",
+      "train_time_sec": 0.01,
+      "params": {
+        "score": "interaction_count"
+      }
+    },
+    "item_knn_cf": {
+      "run_id": "c2b5d01ffbd041e8bf913126634ac80b",
+      "path": "item_knn_cf.pkl",
+      "train_time_sec": 1.69,
+      "params": {
+        "shrinkage": 10.0,
+        "neighbours": 100
+      }
+    },
+    "matrix_factorization_als": {
+      "run_id": "248dd450121a4f5d9e32080c57cdee63",
+      "path": "matrix_factorization_als.pkl",
+      "train_time_sec": 28.29,
+      "params": {
+        "n_factors": 50,
+        "n_iterations": 15,
+        "reg_factors": 0.08,
+        "reg_bias": 5.0
+      }
+    },
+    "hybrid_cf_content": {
+      "run_id": "9573abf779254962bb8236d5677812e5",
+      "path": "hybrid_cf_content.pkl",
+      "train_time_sec": 1.73,
+      "params": {
+        "alpha_cf": 0.2,
+        "beta_content": 0.2,
+        "gamma_popularity": 0.6,
+        "shrinkage": 10.0,
+        "neighbours": 100
+      }
+    }
+  },
+  "parent_run_id": "4b8ed02935774bfbb47bffb9016c0106"
+}

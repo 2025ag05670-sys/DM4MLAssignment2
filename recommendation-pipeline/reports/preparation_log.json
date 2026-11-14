@@ -1,0 +1,18 @@
+{
+  "actions": {
+    "users.gender_standardised": 25,
+    "users.gender_imputed_U": 15,
+    "users.age_imputed_mode": 10,
+    "users.occupation_imputed_0": 0,
+    "users.zipcode_unknown": 15,
+    "items.title_whitespace_stripped": 20,
+    "items.title_placeholder": 5,
+    "items.genres_filled": 8,
+    "interactions.re_ratings_resolved": 300
+  },
+  "rows": {
+    "users": 6040,
+    "items": 3883,
+    "interactions": 998611
+  }
+}

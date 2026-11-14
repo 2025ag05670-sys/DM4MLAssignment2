@@ -1,0 +1,693 @@
+{
+  "generated_at_utc": "2026-11-14T03:05:40.149376+00:00",
+  "summary": [
+    {
+      "table": "users",
+      "input_rows": 6060,
+      "rejected_rows": 20,
+      "rows_with_warnings": 65,
+      "valid_rows": 6040,
+      "error_rate_pct": 0.33,
+      "schema_gate": "PASSED"
+    },
+    {
+      "table": "items",
+      "input_rows": 3893,
+      "rejected_rows": 10,
+      "rows_with_warnings": 33,
+      "valid_rows": 3883,
+      "error_rate_pct": 0.257,
+      "schema_gate": "PASSED"
+    },
+    {
+      "table": "interactions",
+      "input_rows": 1001509,
+      "rejected_rows": 2598,
+      "rows_with_warnings": 600,
+      "valid_rows": 998911,
+      "error_rate_pct": 0.259,
+      "schema_gate": "PASSED"
+    }
+  ],
+  "checks": [
+    {
+      "table": "users",
+      "rule": "missing_value",
+      "column": "user_id",
+      "severity": "error",
+      "failed_rows": 0,
+      "failed_pct": 0.0,
+      "description": "user_id is empty",
+      "sample": []
+    },
+    {
+      "table": "users",
+      "rule": "invalid_type",
+      "column": "user_id",
+      "severity": "error",
+      "failed_rows": 0,
+      "failed_pct": 0.0,
+      "description": "user_id not an integer",
+      "sample": []
+    },
+    {
+      "table": "users",
+      "rule": "exact_duplicate",
+      "column": "*",
+      "severity": "error",
+      "failed_rows": 19,
+      "failed_pct": 0.3135,
+      "description": "row repeated verbatim",
+      "sample": [
+        {
+          "user_id": "1208",
+          "gender": "M",
+          "age": "25",
+          "occupation": "0",
+          "zipcode": "12590"
+        },
+        {
+          "user_id": "4571",
+          "gender": "M",
+          "age": "35",
+          "occupation": "7",
+          "zipcode": "21013"
+        },
+        {
+          "user_id": "2252",
+          "gender": "F",
+          "age": "18",
+          "occupation": "1",
+          "zipcode": "01562"
+        }
+      ]
+    },
+    {
+      "table": "users",
+      "rule": "duplicate_key",
+      "column": "user_id",
+      "severity": "error",
+      "failed_rows": 1,
+      "failed_pct": 0.0165,
+      "description": "same user_id with different attributes",
+      "sample": [
+        {
+          "user_id": "512",
+          "gender": "M",
+          "age": "35",
+          "occupation": "0",
+          "zipcode": "55379"
+        }
+      ]
+    },
+    {
+      "table": "users",
+      "rule": "missing_value",
+      "column": "gender",
+      "severity": "warning",
+      "failed_rows": 15,
+      "failed_pct": 0.2475,
+      "description": "gender empty -> imputed 'U'",
+      "sample": [
+        {
+          "user_id": "1341",
+          "gender": "",
+          "age": "18",
+          "occupation": "7",
+          "zipcode": "11434"
+        },
+        {
+          "user_id": "1342",
+          "gender": "",
+          "age": "35",
+          "occupation": "0",
+          "zipcode": "94560"
+        },
+        {
+          "user_id": "1766",
+          "gender": "",
+          "age": "45",
+          "occupation": "0",
+          "zipcode": "94566"
+        }
+      ]
+    },
+    {
+      "table": "users",
+      "rule": "non_standard_format",
+      "column": "gender",
+      "severity": "warning",
+      "failed_rows": 25,
+      "failed_pct": 0.4125,
+      "description": "gender not upper-case -> standardised",
+      "sample": [
+        {
+          "user_id": "81",
+          "gender": "f",
+          "age": "25",
+          "occupation": "0",
+          "zipcode": "60640"
+        },
+        {
+          "user_id": "512",
+          "gender": "m",
+          "age": "35",
+          "occupation": "0",
+          "zipcode": "55379"
+        },
+        {
+          "user_id": "772",
+          "gender": "m",
+          "age": "18",
+          "occupation": "12",
+          "zipcode": "89118"
+        }
+      ]
+    },
+    {
+      "table": "users",
+      "rule": "invalid_domain",
+      "column": "gender",
+      "severity": "warning",
+      "failed_rows": 0,
+      "failed_pct": 0.0,
+      "description": "gender outside {M,F}",
+      "sample": []
+    },
+    {
+      "table": "users",
+      "rule": "invalid_domain",
+      "column": "age",
+      "severity": "warning",
+      "failed_rows": 10,
+      "failed_pct": 0.165,
+      "description": "age not a MovieLens age bucket -> imputed with mode",
+      "sample": [
+        {
+          "user_id": "122",
+          "gender": "F",
+          "age": "-5",
+          "occupation": "4",
+          "zipcode": "94305"
+        },
+        {
+          "user_id": "305",
+          "gender": "F",
+          "age": "200",
+          "occupation": "0",
+          "zipcode": "55414"
+        },
+        {
+          "user_id": "951",
+          "gender": "M",
+          "age": "-5",
+          "occupation": "2",
+          "zipcode": "10009"
+        }
+      ]
+    },
+    {
+      "table": "users",
+      "rule": "invalid_domain",
+      "column": "occupation",
+      "severity": "warning",
+      "failed_rows": 0,
+      "failed_pct": 0.0,
+      "description": "occupation code out of range",
+      "sample": []
+    },
+    {
+      "table": "users",
+      "rule": "missing_value",
+      "column": "zipcode",
+      "severity": "warning",
+      "failed_rows": 15,
+      "failed_pct": 0.2475,
+      "description": "zipcode empty -> 'unknown'",
+      "sample": [
+        {
+          "user_id": "188",
+          "gender": "M",
+          "age": "56",
+          "occupation": "16",
+          "zipcode": ""
+        },
+        {
+          "user_id": "646",
+          "gender": "M",
+          "age": "35",
+          "occupation": "7",
+          "zipcode": ""
+        },
+        {
+          "user_id": "2220",
+          "gender": "F",
+          "age": "50",
+          "occupation": "3",
+          "zipcode": ""
+        }
+      ]
+    },
+    {
+      "table": "items",
+      "rule": "missing_value",
+      "column": "movie_id",
+      "severity": "error",
+      "failed_rows": 0,
+      "failed_pct": 0.0,
+      "description": "movie_id is empty",
+      "sample": []
+    },
+    {
+      "table": "items",
+      "rule": "invalid_type",
+      "column": "movie_id",
+      "severity": "error",
+      "failed_rows": 0,
+      "failed_pct": 0.0,
+      "description": "movie_id not an integer",
+      "sample": []
+    },
+    {
+      "table": "items",
+      "rule": "exact_duplicate",
+      "column": "*",
+      "severity": "error",
+      "failed_rows": 9,
+      "failed_pct": 0.2312,
+      "description": "row repeated verbatim",
+      "sample": [
+        {
+          "movie_id": "2261",
+          "title": "One Crazy Summer (1986)",
+          "genres": "Comedy"
+        },
+        {
+          "movie_id": "1759",
+          "title": "Four Days in September (1997)",
+          "genres": "Drama"
+        },
+        {
+          "movie_id": "2833",
+          "title": "Lucie Aubrac (1997)",
+          "genres": "Romance|War"
+        }
+      ]
+    },
+    {
+      "table": "items",
+      "rule": "duplicate_key",
+      "column": "movie_id",
+      "severity": "error",
+      "failed_rows": 1,
+      "failed_pct": 0.0257,
+      "description": "same movie_id with different attributes",
+      "sample": [
+        {
+          "movie_id": "1890",
+          "title": "Little Boy Blue (1997)",
+          "genres": "Drama"
+        }
+      ]
+    },
+    {
+      "table": "items",
+      "rule": "missing_value",
+      "column": "title",
+      "severity": "warning",
+      "failed_rows": 5,
+      "failed_pct": 0.1284,
+      "description": "title empty -> placeholder",
+      "sample": [
+        {
+          "movie_id": "1094",
+          "title": "",
+          "genres": "Drama|Romance|War"
+        },
+        {
+          "movie_id": "1692",
+          "title": "",
+          "genres": "Horror|Sci-Fi"
+        },
+        {
+          "movie_id": "2034",
+          "title": "",
+          "genres": "Sci-Fi"
+        }
+      ]
+    },
+    {
+      "table": "items",
+      "rule": "non_standard_format",
+      "column": "title",
+      "severity": "warning",
+      "failed_rows": 20,
+      "failed_pct": 0.5137,
+      "description": "leading/trailing whitespace",
+      "sample": [
+        {
+          "movie_id": "32",
+          "title": "  Twelve Monkeys (1995)   ",
+          "genres": "Drama|Sci-Fi"
+        },
+        {
+          "movie_id": "62",
+          "title": "  Mr. Holland's Opus (1995)   ",
+          "genres": "Drama"
+        },
+        {
+          "movie_id": "111",
+          "title": "  Taxi Driver (1976)   ",
+          "genres": "Drama|Thriller"
+        }
+      ]
+    },
+    {
+      "table": "items",
+      "rule": "missing_value",
+      "column": "genres",
+      "severity": "warning",
+      "failed_rows": 8,
+      "failed_pct": 0.2055,
+      "description": "genres empty -> '(no genres listed)'",
+      "sample": [
+        {
+          "movie_id": "165",
+          "title": "Die Hard: With a Vengeance (1995)",
+          "genres": ""
+        },
+        {
+          "movie_id": "276",
+          "title": "Milk Money (1994)",
+          "genres": ""
+        },
+        {
+          "movie_id": "1482",
+          "title": "Van, The (1996)",
+          "genres": ""
+        }
+      ]
+    },
+    {
+      "table": "interactions",
+      "rule": "missing_value",
+      "column": "user_id",
+      "severity": "error",
+      "failed_rows": 200,
+      "failed_pct": 0.02,
+      "description": "user_id is empty",
+      "sample": [
+        {
+          "user_id": "",
+          "movie_id": "422",
+          "rating": "5",
+          "timestamp": "1007755476"
+        },
+        {
+          "user_id": "",
+          "movie_id": "3147",
+          "rating": "3",
+          "timestamp": "966354095"
+        },
+        {
+          "user_id": "",
+          "movie_id": "3638",
+          "rating": "4",
+          "timestamp": "966092771"
+        }
+      ]
+    },
+    {
+      "table": "interactions",
+      "rule": "missing_value",
+      "column": "movie_id",
+      "severity": "error",
+      "failed_rows": 0,
+      "failed_pct": 0.0,
+      "description": "movie_id is empty",
+      "sample": []
+    },
+    {
+      "table": "interactions",
+      "rule": "missing_value",
+      "column": "rating",
+      "severity": "error",
+      "failed_rows": 300,
+      "failed_pct": 0.03,
+      "description": "rating is empty",
+      "sample": [
+        {
+          "user_id": "4618",
+          "movie_id": "2997",
+          "rating": "",
+          "timestamp": "964126444"
+        },
+        {
+          "user_id": "5350",
+          "movie_id": "922",
+          "rating": "",
+          "timestamp": "960661921"
+        },
+        {
+          "user_id": "1396",
+          "movie_id": "1194",
+          "rating": "",
+          "timestamp": "974765472"
+        }
+      ]
+    },
+    {
+      "table": "interactions",
+      "rule": "missing_value",
+      "column": "timestamp",
+      "severity": "error",
+      "failed_rows": 0,
+      "failed_pct": 0.0,
+      "description": "timestamp is empty",
+      "sample": []
+    },
+    {
+      "table": "interactions",
+      "rule": "invalid_type",
+      "column": "user_id",
+      "severity": "error",
+      "failed_rows": 0,
+      "failed_pct": 0.0,
+      "description": "user_id is not numeric",
+      "sample": []
+    },
+    {
+      "table": "interactions",
+      "rule": "invalid_type",
+      "column": "movie_id",
+      "severity": "error",
+      "failed_rows": 0,
+      "failed_pct": 0.0,
+      "description": "movie_id is not numeric",
+      "sample": []
+    },
+    {
+      "table": "interactions",
+      "rule": "invalid_type",
+      "column": "rating",
+      "severity": "error",
+      "failed_rows": 200,
+      "failed_pct": 0.02,
+      "description": "rating is not numeric",
+      "sample": [
+        {
+          "user_id": "4277",
+          "movie_id": "1061",
+          "rating": "five",
+          "timestamp": "975252508"
+        },
+        {
+          "user_id": "2165",
+          "movie_id": "2989",
+          "rating": "abc",
+          "timestamp": "974612907"
+        },
+        {
+          "user_id": "4489",
+          "movie_id": "173",
+          "rating": "4 stars",
+          "timestamp": "965010725"
+        }
+      ]
+    },
+    {
+      "table": "interactions",
+      "rule": "invalid_rating",
+      "column": "rating",
+      "severity": "error",
+      "failed_rows": 300,
+      "failed_pct": 0.03,
+      "description": "rating outside [1,5] or not an integer",
+      "sample": [
+        {
+          "user_id": "2854",
+          "movie_id": "1371",
+          "rating": "-1",
+          "timestamp": "972531381"
+        },
+        {
+          "user_id": "4510",
+          "movie_id": "2004",
+          "rating": "0",
+          "timestamp": "966801042"
+        },
+        {
+          "user_id": "4898",
+          "movie_id": "1050",
+          "rating": "-1",
+          "timestamp": "962712256"
+        }
+      ]
+    },
+    {
+      "table": "interactions",
+      "rule": "invalid_timestamp",
+      "column": "timestamp",
+      "severity": "error",
+      "failed_rows": 300,
+      "failed_pct": 0.03,
+      "description": "timestamp malformed or outside [1995-01-01, 2026-01-01)",
+      "sample": [
+        {
+          "user_id": "3029",
+          "movie_id": "3271",
+          "rating": "3",
+          "timestamp": "2001-13-45"
+        },
+        {
+          "user_id": "5321",
+          "movie_id": "597",
+          "rating": "3",
+          "timestamp": "0"
+        },
+        {
+          "user_id": "3462",
+          "movie_id": "3869",
+          "rating": "3",
+          "timestamp": "0"
+        }
+      ]
+    },
+    {
+      "table": "interactions",
+      "rule": "exact_duplicate",
+      "column": "*",
+      "severity": "error",
+      "failed_rows": 999,
+      "failed_pct": 0.0997,
+      "description": "row repeated verbatim",
+      "sample": [
+        {
+          "user_id": "5278",
+          "movie_id": "3479",
+          "rating": "4",
+          "timestamp": "964023870"
+        },
+        {
+          "user_id": "4099",
+          "movie_id": "912",
+          "rating": "4",
+          "timestamp": "965416789"
+        },
+        {
+          "user_id": "1448",
+          "movie_id": "1459",
+          "rating": "4",
+          "timestamp": "976215730"
+        }
+      ]
+    },
+    {
+      "table": "interactions",
+      "rule": "referential_integrity",
+      "column": "user_id",
+      "severity": "error",
+      "failed_rows": 150,
+      "failed_pct": 0.015,
+      "description": "user_id not present in validated users table",
+      "sample": [
+        {
+          "user_id": "92310",
+          "movie_id": "661",
+          "rating": "4",
+          "timestamp": "1014962323"
+        },
+        {
+          "user_id": "97894",
+          "movie_id": "2243",
+          "rating": "5",
+          "timestamp": "975205761"
+        },
+        {
+          "user_id": "91988",
+          "movie_id": "2724",
+          "rating": "4",
+          "timestamp": "966628736"
+        }
+      ]
+    },
+    {
+      "table": "interactions",
+      "rule": "referential_integrity",
+      "column": "movie_id",
+      "severity": "error",
+      "failed_rows": 150,
+      "failed_pct": 0.015,
+      "description": "movie_id not present in validated items table",
+      "sample": [
+        {
+          "user_id": "3308",
+          "movie_id": "974550",
+          "rating": "1",
+          "timestamp": "967999409"
+        },
+        {
+          "user_id": "5111",
+          "movie_id": "973924",
+          "rating": "4",
+          "timestamp": "962334345"
+        },
+        {
+          "user_id": "3624",
+          "movie_id": "915309",
+          "rating": "5",
+          "timestamp": "966622935"
+        }
+      ]
+    },
+    {
+      "table": "interactions",
+      "rule": "duplicate_key",
+      "column": "user_id+movie_id",
+      "severity": "warning",
+      "failed_rows": 600,
+      "failed_pct": 0.0599,
+      "description": "user re-rated the same item -> latest kept in preparation",
+      "sample": [
+        {
+          "user_id": "4041",
+          "movie_id": "2463",
+          "rating": "1",
+          "timestamp": "967549318"
+        },
+        {
+          "user_id": "3281",
+          "movie_id": "1291",
+          "rating": "1",
+          "timestamp": "969671859"
+        },
+        {
+          "user_id": "4387",
+          "movie_id": "1727",
+          "rating": "3",
+          "timestamp": "977034280"
+        }
+      ]
+    }
+  ]
+}

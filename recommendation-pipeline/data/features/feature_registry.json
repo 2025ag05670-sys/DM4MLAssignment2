@@ -1,0 +1,242 @@
+{
+  "version": "v1",
+  "created_at_utc": "2026-11-14T03:05:49.026464+00:00",
+  "as_of": "2000-12-02T14:58:06+00:00",
+  "user_rows": 5400,
+  "item_rows": 3883,
+  "user_genre_rows": 82782,
+  "features": [
+    {
+      "name": "user_activity_count",
+      "entity": "user",
+      "dtype": "int",
+      "description": "Number of ratings the user gave before the cutoff",
+      "derivation": "count(ratings) per user_id on train",
+      "used_by": "Hybrid, analysis"
+    },
+    {
+      "name": "user_avg_rating",
+      "entity": "user",
+      "dtype": "float",
+      "description": "Mean rating given by the user",
+      "derivation": "mean(rating) per user_id",
+      "used_by": "MF (bias init), Hybrid"
+    },
+    {
+      "name": "user_rating_std",
+      "entity": "user",
+      "dtype": "float",
+      "description": "Std-dev of the user's ratings (0 if one rating)",
+      "derivation": "std(rating) per user_id",
+      "used_by": "analysis"
+    },
+    {
+      "name": "user_rating_bias",
+      "entity": "user",
+      "dtype": "float",
+      "description": "How much more generous the user is than average",
+      "derivation": "user_avg_rating - global_mean_rating",
+      "used_by": "analysis"
+    },
+    {
+      "name": "user_like_ratio",
+      "entity": "user",
+      "dtype": "float",
+      "description": "Share of the user's ratings that are >= 4",
+      "derivation": "mean(rating >= 4) per user_id",
+      "used_by": "analysis"
+    },
+    {
+      "name": "user_days_since_last_interaction",
+      "entity": "user",
+      "dtype": "int",
+      "description": "Recency: days from last rating to cutoff",
+      "derivation": "(cutoff - max(timestamp)).days",
+      "used_by": "serving (recency filter)"
+    },
+    {
+      "name": "user_tenure_days",
+      "entity": "user",
+      "dtype": "int",
+      "description": "Days between first and last rating",
+      "derivation": "(max(ts) - min(ts)).days + 1",
+      "used_by": "analysis"
+    },
+    {
+      "name": "user_n_distinct_genres",
+      "entity": "user",
+      "dtype": "int",
+      "description": "Breadth of taste: distinct genres rated",
+      "derivation": "nunique(genre) over exploded genre_list",
+      "used_by": "analysis"
+    },
+    {
+      "name": "user_preferred_genre",
+      "entity": "user",
+      "dtype": "category",
+      "description": "Genre the user rated most often",
+      "derivation": "argmax(count) over user's genres",
+      "used_by": "serving (explanations)"
+    },
+    {
+      "name": "user_mainstreamness",
+      "entity": "user",
+      "dtype": "float",
+      "description": "Avg popularity percentile of items the user rated",
+      "derivation": "mean(item_popularity_percentile) over user's items",
+      "used_by": "analysis"
+    },
+    {
+      "name": "user_gender",
+      "entity": "user",
+      "dtype": "category",
+      "description": "Gender (M/F/U after imputation)",
+      "derivation": "users.gender",
+      "used_by": "analysis"
+    },
+    {
+      "name": "user_age_bucket",
+      "entity": "user",
+      "dtype": "int",
+      "description": "MovieLens age bucket",
+      "derivation": "users.age",
+      "used_by": "analysis"
+    },
+    {
+      "name": "user_occupation",
+      "entity": "user",
+      "dtype": "int",
+      "description": "Occupation code 0-20",
+      "derivation": "users.occupation",
+      "used_by": "analysis"
+    },
+    {
+      "name": "item_popularity",
+      "entity": "item",
+      "dtype": "int",
+      "description": "Number of ratings received before the cutoff",
+      "derivation": "count(ratings) per movie_id",
+      "used_by": "Popularity, Hybrid (prior)"
+    },
+    {
+      "name": "item_popularity_percentile",
+      "entity": "item",
+      "dtype": "float",
+      "description": "Popularity percentile rank (1 = most popular)",
+      "derivation": "rank(item_popularity, pct=True)",
+      "used_by": "user_mainstreamness"
+    },
+    {
+      "name": "item_avg_rating",
+      "entity": "item",
+      "dtype": "float",
+      "description": "Mean rating received",
+      "derivation": "mean(rating) per movie_id",
+      "used_by": "rating baseline"
+    },
+    {
+      "name": "item_bayesian_avg",
+      "entity": "item",
+      "dtype": "float",
+      "description": "Rating shrunk towards the global mean",
+      "derivation": "(n*avg + m*global_mean)/(n+m), m = bayesian_prior_count",
+      "used_by": "Popularity (alt. score)"
+    },
+    {
+      "name": "item_rating_std",
+      "entity": "item",
+      "dtype": "float",
+      "description": "Std-dev of ratings received",
+      "derivation": "std(rating) per movie_id",
+      "used_by": "analysis"
+    },
+    {
+      "name": "item_like_ratio",
+      "entity": "item",
+      "dtype": "float",
+      "description": "Share of ratings >= 4",
+      "derivation": "mean(rating >= 4) per movie_id",
+      "used_by": "analysis"
+    },
+    {
+      "name": "item_days_since_last_interaction",
+      "entity": "item",
+      "dtype": "int",
+      "description": "Days from the item's last rating to cutoff",
+      "derivation": "(cutoff - max(timestamp)).days",
+      "used_by": "analysis"
+    },
+    {
+      "name": "item_release_year",
+      "entity": "item",
+      "dtype": "int",
+      "description": "Release year parsed from title",
+      "derivation": "regex on title",
+      "used_by": "analysis"
+    },
+    {
+      "name": "item_age_years",
+      "entity": "item",
+      "dtype": "int",
+      "description": "Years between release and cutoff",
+      "derivation": "cutoff.year - item_release_year",
+      "used_by": "analysis"
+    },
+    {
+      "name": "item_primary_genre",
+      "entity": "item",
+      "dtype": "category",
+      "description": "First listed genre",
+      "derivation": "genre_list[0]",
+      "used_by": "analysis"
+    },
+    {
+      "name": "genre_<name> (x18)",
+      "entity": "item",
+      "dtype": "int(0/1)",
+      "description": "Multi-hot genre indicators",
+      "derivation": "one-hot of genre_list",
+      "used_by": "Hybrid, Diversity metric"
+    },
+    {
+      "name": "user_genre_share",
+      "entity": "user_genre",
+      "dtype": "float",
+      "description": "Fraction of the user's ratings in this genre",
+      "derivation": "count(user,genre)/count(user)",
+      "used_by": "Hybrid"
+    },
+    {
+      "name": "user_genre_avg_rating",
+      "entity": "user_genre",
+      "dtype": "float",
+      "description": "User's mean rating within the genre",
+      "derivation": "mean(rating) per (user, genre)",
+      "used_by": "Hybrid"
+    },
+    {
+      "name": "user_genre_affinity",
+      "entity": "user_genre",
+      "dtype": "float",
+      "description": "Combined preference score for the genre",
+      "derivation": "user_genre_share * user_genre_avg_rating / 5",
+      "used_by": "Hybrid"
+    },
+    {
+      "name": "ui_genre_affinity",
+      "entity": "user_item",
+      "dtype": "float",
+      "description": "On-demand: mean user_genre_affinity over the candidate item's genres",
+      "derivation": "computed by FeatureStore.get_user_item_features()",
+      "used_by": "Hybrid (train + serve)"
+    },
+    {
+      "name": "ui_popularity_gap",
+      "entity": "user_item",
+      "dtype": "float",
+      "description": "On-demand: item popularity percentile minus user mainstreamness",
+      "derivation": "computed by FeatureStore.get_user_item_features()",
+      "used_by": "analysis / re-ranking"
+    }
+  ]
+}

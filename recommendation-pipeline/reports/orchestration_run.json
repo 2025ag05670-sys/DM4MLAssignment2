@@ -1,0 +1,78 @@
+{
+  "flow": "recommendation-pipeline",
+  "started_utc": "2026-11-14T03:05:19.810292+00:00",
+  "tasks": [
+    {
+      "task": "ingest_data",
+      "state": "Completed",
+      "start_s": 0.0,
+      "end_s": 7.14
+    },
+    {
+      "task": "validate_data",
+      "state": "Completed",
+      "start_s": 7.14,
+      "end_s": 20.42
+    },
+    {
+      "task": "prepare_data",
+      "state": "Completed",
+      "start_s": 20.42,
+      "end_s": 21.66
+    },
+    {
+      "task": "transform_data",
+      "state": "Completed",
+      "start_s": 21.66,
+      "end_s": 24.37
+    },
+    {
+      "task": "build_features",
+      "state": "Completed",
+      "start_s": 24.37,
+      "end_s": 29.22
+    },
+    {
+      "task": "train_models",
+      "state": "Completed",
+      "start_s": 29.22,
+      "end_s": 65.63
+    },
+    {
+      "task": "evaluate_models",
+      "state": "Completed",
+      "start_s": 65.63,
+      "end_s": 70.9
+    }
+  ],
+  "flow_run_id": "824f9ad4-2118-49c4-8baf-42dff8bdfb09",
+  "flow_run_name": "tangerine-sawfly",
+  "state": "Completed",
+  "total_seconds": 70.9,
+  "results": [
+    {
+      "model": "popularity",
+      "precision_at_10": 0.195,
+      "recall_at_10": 0.0498,
+      "ndcg_at_10": 0.2102
+    },
+    {
+      "model": "item_knn_cf",
+      "precision_at_10": 0.1634,
+      "recall_at_10": 0.0521,
+      "ndcg_at_10": 0.1834
+    },
+    {
+      "model": "matrix_factorization_als",
+      "precision_at_10": 0.0828,
+      "recall_at_10": 0.0217,
+      "ndcg_at_10": 0.0845
+    },
+    {
+      "model": "hybrid_cf_content",
+      "precision_at_10": 0.2138,
+      "recall_at_10": 0.0604,
+      "ndcg_at_10": 0.231
+    }
+  ]
+}

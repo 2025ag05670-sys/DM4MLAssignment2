@@ -1,0 +1,11 @@
+movie_id,title,genres,error_reasons
+2261,One Crazy Summer (1986),Comedy,error:exact_duplicate(*)
+1759,Four Days in September (1997),Drama,error:exact_duplicate(*)
+2833,Lucie Aubrac (1997),Romance|War,error:exact_duplicate(*)
+308,Three Colors: White (1994),Drama,error:exact_duplicate(*)
+3896,"Way of the Gun, The (2000)",Crime|Thriller,error:exact_duplicate(*)
+1122,Plutonium Circus (1995),Documentary,error:exact_duplicate(*)
+1890,Little Boy Blue (1997),Drama,error:duplicate_key(movie_id)
+1141,Hoogste tijd (1995),Drama,error:exact_duplicate(*)
+157,Canadian Bacon (1994),Comedy|War,error:exact_duplicate(*)
+2729,Lolita (1962),Drama,error:exact_duplicate(*)
